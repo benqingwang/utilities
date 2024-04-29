@@ -14,3 +14,22 @@ for text in diff:
         print('\033[91m' + text + '\033[0m')  # Red text for deletions
     else:
         print(text)  # No change
+
+
+# Start building the HTML output
+html_content = '<html><head><title>String Comparison</title></head><body>'
+html_content += '<h1>Differences:</h1>'
+
+for text in diff:
+    if text[0] == '+':
+        html_content += f'<span style="color: green;">{text}</span><br/>'
+    elif text[0] == '-':
+        html_content += f'<span style="color: red;">{text}</span><br/>'
+    else:
+        html_content += f'{text}<br/>'
+
+html_content += '</body></html>'
+
+# Write the HTML content to a file
+with open('diff_output.html', 'w') as file:
+    file.write(html_content)

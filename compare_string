@@ -1,0 +1,16 @@
+import difflib
+
+str1 = "This is an example."
+str2 = "This is a sample."
+
+d = difflib.Differ()
+diff = list(d.compare(str1.split(), str2.split()))
+
+print("Differences:")
+for text in diff:
+    if text[0] == '+':
+        print('\033[92m' + text + '\033[0m')  # Green text for additions
+    elif text[0] == '-':
+        print('\033[91m' + text + '\033[0m')  # Red text for deletions
+    else:
+        print(text)  # No change

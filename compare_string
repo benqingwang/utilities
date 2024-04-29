@@ -33,3 +33,22 @@ html_content += '</body></html>'
 # Write the HTML content to a file
 with open('diff_output.html', 'w') as file:
     file.write(html_content)
+
+#========================================================
+# To achieve a comparison that closely resembles Microsoft Word's "Track Changes" feature, which shows detailed character-by-character differences within words, you can use the htmldiff library in Python.
+#========================================================
+from htmldiff import diff
+
+# Example strings
+str1 = "This is an example."
+str2 = "This is a sample."
+
+# Generate HTML showing differences
+html_diff = diff(str1, str2)
+
+# Create the full HTML content
+html_content = f'<html><head><title>String Comparison</title></head><body>{html_diff}</body></html>'
+
+# Write the HTML content to a file
+with open('diff_output.html', 'w') as file:
+    file.write(html_content)

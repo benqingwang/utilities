@@ -62,3 +62,13 @@ code {
 .python .keyword { color: #0000FF; } /* Blue for Python keywords */
 .python .function { color: #008000; } /* Green for function names */
 .python .string { color: #FF0000; } /* Red for strings */
+
+
+
+.code-container {
+    border: 1px solid #ccc; /* Light grey border */
+    background-color: #fff; /* White background for the code area */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the box */
+    margin: 20px 0; /* Spacing around the box */
+}

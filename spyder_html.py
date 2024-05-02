@@ -38,3 +38,27 @@ code {
 .python .keyword { color: #569cd6; } /* Blue for Python keywords */
 .python .function { color: #dcdcaa; } /* Yellow for function calls */
 .python .string { color: #ce9178; } /* Light orange for strings */
+
+
+# light
+body {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text color */
+    font-family: 'Consolas', 'Monaco', monospace; /* Monospace font for code */
+    margin: 0;
+    padding: 20px;
+}
+
+.editor {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f7f7f7; /* Light grey background for the editor area */
+}
+
+code {
+    color: #000000; /* Black color for general code */
+}
+
+.python .keyword { color: #0000FF; } /* Blue for Python keywords */
+.python .function { color: #008000; } /* Green for function names */
+.python .string { color: #FF0000; } /* Red for strings */

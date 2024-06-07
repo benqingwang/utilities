@@ -52,3 +52,58 @@ for p in ax2.patches:
 # Adjust the layout
 plt.tight_layout()
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+# Sample data
+data = {
+    'Department': ['HR', 'IT', 'Finance', 'Marketing', 'Sales'],
+    'Starting': [50, 80, 60, 70, 90],
+    'Ending': [55, 75, 65, 80, 85],
+    'Joiners': [10, 5, 10, 15, 8],
+    'Leavers': [5, 10, 5, 5, 13]
+}
+
+df = pd.DataFrame(data)
+
+# Create a subplot with 2 rows
+fig = make_subplots(rows=2, cols=1, subplot_titles=('Starting and Ending Number of Employees', 'Number of New Joiners and Leavers'))
+
+# Add bar chart for Starting and Ending numbers
+fig.add_trace(go.Bar(x=df['Department'], y=df['Starting'], name='Starting', marker_color='blue'), row=1, col=1)
+fig.add_trace(go.Bar(x=df['Department'], y=df['Ending'], name='Ending', marker_color='green'), row=1, col=1)
+
+# Add data labels for Starting and Ending numbers
+fig.update_traces(texttemplate='%{y}', textposition='outside', row=1, col=1)
+
+# Add bar chart for Joiners and Leavers
+fig.add_trace(go.Bar(x=df['Department'], y=df['Joiners'], name='Joiners', marker_color='orange'), row=2, col=1)
+fig.add_trace(go.Bar(x=df['Department'], y=df['Leavers'], name='Leavers', marker_color='red'), row=2, col=1)
+
+# Add data labels for Joiners and Leavers
+fig.update_traces(texttemplate='%{y}', textposition='outside', row=2, col=1)
+
+# Update layout
+fig.update_layout(height=800, width=800, showlegend=True, title_text="Employee Data")
+
+# Convert the plotly figure to an HTML string
+html_str = fig.to_html(full_html=False)
+
+# Save the HTML string to an HTML file
+with open("chart.html", "w") as html_file:
+    html_file.write(html_str)
+
+# Display the figure (optional)
+fig.show()

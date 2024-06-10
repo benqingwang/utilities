@@ -29,3 +29,34 @@ plt.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, s
 plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 plt.title('Pie Chart Example')
 plt.show()
+
+
+
+import matplotlib.pyplot as plt
+
+# Example data
+labels = ['A', 'B', 'C', 'D']
+sizes = [15, 30, 45, 10]
+explode = (0.1, 0, 0, 0)  # explode the 1st slice (i.e. 'A')
+
+# Set the style of the plot
+plt.style.use('seaborn-colorblind')
+
+# Create a pie chart with improved aesthetics
+fig, ax = plt.subplots()
+wedges, texts, autotexts = ax.pie(
+    sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+    shadow=True, startangle=140, textprops=dict(color="w"),
+    wedgeprops=dict(width=0.3, edgecolor='w')
+)
+
+# Improve text and labels
+plt.setp(autotexts, size=10, weight="bold")
+plt.setp(texts, size=12)
+
+# Add a legend
+ax.legend(wedges, labels, title="Categories", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+
+plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.title('Enhanced Pie Chart Example', fontsize=14, fontweight='bold')
+plt.show()

@@ -27,3 +27,25 @@ html_str2 = mpld3.fig_to_html(fig2)
 combined_html = f"<html><body>{html_str1}<hr>{html_str2}</body></html>"
 with open("multiple_histograms.html", "w") as f:
     f.write(combined_html)
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example data
+data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5]
+
+# Set the style of the plot
+sns.set(style="whitegrid")
+
+# Create a histogram
+plt.figure(figsize=(10, 6))
+sns.histplot(data, bins=5, kde=True)
+
+# Add titles and labels
+plt.title('Histogram with Seaborn', fontsize=14, fontweight='bold')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+
+# Show the plot
+plt.show()

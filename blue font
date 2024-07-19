@@ -1,0 +1,40 @@
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.pdfpage import PDFPage
+from pdfminer.converter import PDFPageAggregator
+from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTChar, LTFigure
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfdevice import PDFDevice
+from pdfminer.psparser import PSKeyword, PSLiteral
+
+# Function to parse the PDF and extract text with color information
+def extract_text_and_color(pdf_path):
+    with open(pdf_path, 'rb') as file:
+        parser = PDFParser(file)
+        document = PDFDocument(parser)
+        if not document.is_extractable:
+            raise PDFTextExtractionNotAllowed
+
+        rsrcmgr = PDFResourceManager()
+        laparams = LAParams()
+        device = PDFPageAggregator(rsrcmgr, laparams=laparams)
+        interpreter = PDFPageInterpreter(rsrcmgr, device)
+
+        for page in PDFPage.create_pages(document):
+            interpreter.process_page(page)
+            layout = device.get_result()
+
+            for element in layout:
+                if isinstance(element, (LTTextBox, LTTextLine)):
+                    for obj in element:
+                        if isinstance(obj, LTChar):
+                            if obj.graphicstate:
+                                stroke_color = obj.graphicstate.sstroke
+                                if stroke_color and stroke_color.ncomponents == 3:
+                                    if stroke_color.components[2] > 0 and stroke_color.components[1] == 0 and stroke_color.components[0] == 0:
+                                        print(f"Text: {obj.get_text().strip()} Color: {stroke_color.components}")
+
+# Example usage
+pdf_path = 'path_to_your_pdf.pdf'
+extract_text_and_color(pdf_path)

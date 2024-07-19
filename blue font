@@ -79,3 +79,45 @@ print("Blue texts found in PDF:")
 for text in blue_texts:
     print(text)
 
+
+
+
+
+
+
+
+import fitz  # PyMuPDF
+
+def is_blue_color(color):
+    """Check if the color is blue."""
+    if color:
+        r, g, b = color[:3]
+        return r == 0 and g == 0 and b > 0
+    return False
+
+def extract_blue_text(pdf_path):
+    blue_texts = []
+
+    # Open the PDF file
+    document = fitz.open(pdf_path)
+
+    # Iterate through each page
+    for page_num in range(len(document)):
+        page = document.load_page(page_num)
+        blocks = page.get_text("dict")["blocks"]
+
+        for block in blocks:
+            for line in block.get("lines", []):
+                for span in line.get("spans", []):
+                    if is_blue_color(span.get("color")):
+                        blue_texts.append(span.get("text"))
+
+    return blue_texts
+
+# Example usage
+pdf_path = 'path_to_your_pdf.pdf'
+blue_texts = extract_blue_text(pdf_path)
+print("Blue texts found in PDF:")
+for text in blue_texts:
+    print(text)
+
